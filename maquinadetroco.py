@@ -41,9 +41,9 @@ class MaquinaDeTroco:
                     self.sbNotas.Append("\n")
                     vlr = vlr % self.notas[i]
                 else:
-                    self.sbNotas.Append(str(c)+' moeda de R$' +
-                                        str(self.notas[i])+' real')
-                    self.sbNotas.Append("\n")
+                    self.sbMoedas.Append(str(c)+' moeda de R$' +
+                                         str(self.notas[i])+' real')
+                    self.sbMoedas.Append("\n")
                     vlr = vlr % self.notas[i]
             i += 1
 
@@ -75,21 +75,6 @@ class MaquinaDeTroco:
                     vlr = vlr % self.moedas[i]
             i += 1
 
-    def imprimeValores(self):
-        if self.valorPago < self.valorDaConta:
-            print('Ainda falta pagar: R$'+str(self.troco))
-        elif self.valorDaConta % self.valorPago == 0:
-            print('Pagamento exato ou não há valor a pagar. Não há troco.')
-        else:
-            print("------------- Calculando troco -------------")
-            print("\n")
-            print("Troco: R$", str(round(self.troco, 2)).replace(".", ","))
-            print("\n")
-            print("Cédulas:")
-            print(self.sbNotas)
-            print("Moedas:")
-            print(self.sbMoedas)
-
     def __calculaTroco__(self):
         return(math.fabs(round(self.valorPago, 2)-round(self.valorDaConta, 2)))
 
@@ -108,3 +93,18 @@ class MaquinaDeTroco:
                 self.__calculaValores__()
         else:
             print("Os valores precisam ser maiores do que 0")
+
+    def imprimeValores(self):
+        if self.valorPago < self.valorDaConta:
+            print('Ainda falta pagar: R$'+str(self.troco))
+        elif self.valorDaConta % self.valorPago == 0:
+            print('Pagamento exato ou não há valor a pagar. Não há troco.')
+        else:
+            print("------------- Calculando troco -------------")
+            print("\n")
+            print("Troco: R$", str(round(self.troco, 2)).replace(".", ","))
+            print("\n")
+            print("Cédulas:")
+            print(self.sbNotas)
+            print("Moedas:")
+            print(self.sbMoedas)
