@@ -12,3 +12,6 @@ class StringBuilder:
 
     def __str__(self):
         return self._file_str.getvalue()
+
+    def Length(self):
+        return self._file_str.getvalue()

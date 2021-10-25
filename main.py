@@ -1,10 +1,23 @@
 from maquinadetroco import MaquinaDeTroco
 
 mt = MaquinaDeTroco()
+valorcontavalidado = None
+valorpagovalidado = None
 
-mt.defineValores(5.35, 50)
-mt.imprimeValores()
+print("Máquina de Troco")
 
-mt = MaquinaDeTroco()
-mt.defineValores(6.76, 200)
+valorconta = input('Digite o valor total da conta: R$').replace(",", ".")
+while mt.defineValor(valorconta) is False:
+    print("Digite apenas números, utilizando vírgula (,) ou ponto (.)")
+    valorconta = input(
+        'Digite o valor total da conta: R$').replace(",", ".")
+valorcontavalidado = float(valorconta)
+
+valorpago = input('Digite o valor pago: R$').replace(",", ".")
+while mt.defineValor(valorpago) is False:
+    print("Digite apenas números, utilizando vírgula (,) ou ponto (.)")
+    valorpago = input('Digite o valor pago: R$').replace(",", ".")
+valorpagovalidado = float(valorpago)
+
+mt.defineValoresCalculo(valorcontavalidado, valorpagovalidado)
 mt.imprimeValores()

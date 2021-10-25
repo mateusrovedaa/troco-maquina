@@ -14,10 +14,12 @@ class MaquinaDeTroco:
         self.troco = 0
 
     def __validaValor__(self, valor):
-        if valor < 0:
-            return False
-        else:
-            return True
+        if isinstance(valor, float):
+            if valor < 0:
+                return False
+            else:
+                return True
+        raise ValueError("Os valores não são números.")
 
     def __calculaNotas__(self, troco):
         vlr = int(troco)
@@ -83,20 +85,31 @@ class MaquinaDeTroco:
         self.__calculaNotas__(self.troco)
         self.__calculaMoedas__(self.troco)
 
-    def defineValores(self, valordaconta, valorpago):
-        if self.__validaValor__(valordaconta) and self.__validaValor__(valorpago):
+    def defineValor(self, valor):
+        try:
+            float(valor)
+            return True
+        except ValueError:
+            return False
+
+    def defineValoresCalculo(self, valordaconta, valorpago):
+        if self.__validaValor__(valordaconta) and \
+                self.__validaValor__(valorpago):
+
             self.valorDaConta = float(valordaconta)
             self.valorPago = float(valorpago)
+
             if self.valorDaConta == 0 and self.valorPago == 0:
                 print("É de grátis :)")
             else:
+                print('Calculando troco...')
                 self.__calculaValores__()
         else:
-            print("Os valores precisam ser maiores do que 0")
+            raise ValueError("Os valores não podem ser negativos.")
 
     def imprimeValores(self):
         if self.valorPago < self.valorDaConta:
-            print('Ainda falta pagar: R$'+str(self.troco))
+            print('Ainda falta pagar: R$' + str(self.troco).replace(".", ","))
         elif self.valorDaConta % self.valorPago == 0:
             print('Pagamento exato ou não há valor a pagar. Não há troco.')
         else:
@@ -104,7 +117,10 @@ class MaquinaDeTroco:
             print("\n")
             print("Troco: R$", str(round(self.troco, 2)).replace(".", ","))
             print("\n")
-            print("Cédulas:")
-            print(self.sbNotas)
-            print("Moedas:")
-            print(self.sbMoedas)
+
+            if self.sbNotas.Length() != "":
+                print("Cédulas:")
+                print(self.sbNotas)
+            if self.sbMoedas.Length() != "":
+                print("Moedas:")
+                print(self.sbMoedas)
