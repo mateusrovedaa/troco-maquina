@@ -19,7 +19,7 @@ class MaquinaDeTroco:
                 return False
             else:
                 return True
-        raise ValueError("Os valores não são números.")
+        raise ValueError("Os valores informados não são números.")
 
     def __calculaNotas__(self, troco):
         vlr = int(troco)
