@@ -1,8 +1,6 @@
 from maquinadetroco import MaquinaDeTroco
 
 mt = MaquinaDeTroco()
-valorcontavalidado = None
-valorpagovalidado = None
 
 print("Máquina de Troco")
 
